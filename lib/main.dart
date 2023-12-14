@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'ramen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyRamen());
 }
 
 class MyApp extends StatelessWidget {
@@ -123,3 +124,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+//라면과제
