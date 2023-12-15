@@ -71,4 +71,4 @@ class LoginScreen extends StatelessWidget {
 
 // SignUpScreen 클래스 추가시 회원가입 화면을 만들 수 있습니다.
 // 또한 GestureDetector 위젯의 onTap 속성에 Navigator.push 코드를 추가해주세요.
-// 예: Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+// 예: Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen( )));
