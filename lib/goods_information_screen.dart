@@ -1,138 +1,203 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() {
+  runApp(MyApp());
+}
 
-// This widget is the root of your application.
+class Product {
+  final String name;
+  final String imageUrl;
+  final double price;
+  final int discount;
+
+  Product({
+    required this.name,
+    required this.imageUrl,
+    required this.price,
+    required this.discount,
+  });
+}
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Product Grid',
       theme: ThemeData(
-// This is the theme of your application.
-//
-// TRY THIS: Try running your application with "flutter run". You'll see
-// the application has a blue toolbar. Then, without quitting the app,
-// try changing the seedColor in the colorScheme below to Colors.green
-// and then invoke "hot reload" (save your changes or press the "hot
-// reload" button in a Flutter-supported IDE, or press "r" if you used
-// the command line to start the app).
-//
-// Notice that the counter didn't reset back to zero; the application
-// state is not lost during the reload. To reset the state, use hot
-// restart instead.
-//
-// This works for code too, not just values: Most code changes can be
-// tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(0.0),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.account_circle),
+                    onPressed: () {
+                      // Add your profile action here
+                    },
+                  ),
+                  SizedBox(width: 4),
+                  Expanded(
+                    child: _CustomSearchField(),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_drop_down),
+                    onPressed: () {
+                      // Add your dropdown action here
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                itemCount: products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return buildProductItem(products[index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
+
+  Widget buildProductItem(Product product) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Image.network(
+              product.imageUrl,
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            product.name,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 4),
+          Row(
+            children: [
+              Text(
+                '\$${product.price.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.green,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                '-${product.discount.toString()}%',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  final List<Product> products = List.generate(
+    15,
+        (index) => Product(
+      name: 'Product ${index + 1}',
+      imageUrl: 'https://via.placeholder.com/150',
+      price: (index + 1) * 25.0,
+      discount: ((index + 1) * 25 * 0.2).toInt(),
+    ),
+  );
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class _CustomSearchField extends StatefulWidget {
+  @override
+  _CustomSearchFieldState createState() => _CustomSearchFieldState();
+}
+
+class _CustomSearchFieldState extends State<_CustomSearchField> {
+  late FocusNode _focusNode;
+  late TextEditingController _textEditingController;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _textEditingController = TextEditingController();
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  void _showKeyboard() {
+    FocusScope.of(context).requestFocus(_focusNode);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.topLeft,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return InkWell(
+      onTap: _showKeyboard,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.purple
-                    ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.orange
-                    ),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.red
-                    )
-                  ],
-                )
-              ],
+            IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(Icons.search),
+              onPressed: () {
+                // Add your search action here
+              },
             ),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.greenAccent
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.cyan
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.amber
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.teal
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.white
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.brown
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        color: Colors.lightGreen
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.pink
-                      ),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.yellow
-                      )
-                    ],
-                  )
-                ],
+            Expanded(
+              child: TextField(
+                controller: _textEditingController,
+                focusNode: _focusNode,
+                decoration: InputDecoration(
+                  hintText: '관심있는 상품 검색',
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(vertical: 8.0),
+                ),
+                onTap: () {
+                  setState(() {
+                    _showKeyboard();
+                  });
+                },
+                onChanged: (value) {
+                  // Add your search action here based on the value
+                },
+              ),
             ),
           ],
         ),
@@ -140,3 +205,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
