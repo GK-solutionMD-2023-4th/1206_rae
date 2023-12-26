@@ -27,7 +27,10 @@ class LoginScreen extends StatelessWidget {
                   TextField(
                     decoration: InputDecoration(
                       hintText: '아이디',
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0), // Higher value for elongation
+                        borderSide: BorderSide(), // Add this line for the border to show
+                      ),
                     ),
                   ),
                   SizedBox(height: 20.0),
@@ -35,39 +38,63 @@ class LoginScreen extends StatelessWidget {
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: '비밀번호',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      // 로그인 버튼 눌렀을 때 처리 코드 추가
-                    },
-                    child: Text('로그인'),
-                  ),
-                  SizedBox(height: 10.0),
-                  GestureDetector(
-                    onTap: () {
-                      // 회원가입 화면으로 이동하는 코드 추가
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
-                    },
-                    child: Text(
-                      '회원가입',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0), // Higher value for elongation
+                        borderSide: BorderSide(), // Add this line for the border to show
                       ),
                     ),
                   ),
-                ],
-              ),
+
+                  SizedBox(height: 20.0),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                // Login Text as TextButton on the left side
+                TextButton(
+                  onPressed: () {
+                    // Handle login action
+                  },
+                  child: Text(
+                    '로그인',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+
+                Spacer(), // Adds space between the login and sign-up text
+
+                // Sign-Up Text on the right side
+                GestureDetector(
+                  onTap: () {
+                    // Handle navigation to sign-up screen
+                  },
+                  child: Text(
+                    '회원가입',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-      ),
+
+
+                      ),
+                    ],
+                  ),
+
+        ),
+
     );
   }
 }
+
 
 // SignUpScreen 클래스 추가시 회원가입 화면을 만들 수 있습니다.
 // 또한 GestureDetector 위젯의 onTap 속성에 Navigator.push 코드를 추가해주세요.

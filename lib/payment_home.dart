@@ -43,12 +43,6 @@ class _PaymentPage extends StatelessWidget {
             ),
 
 
-            SizedBox(height: 20.0),// 위젯 간 간격 조절
-            // 주문 상품 정보를 보여주는 텍스트
-            Text(
-              'Product Name: Example Product\nQuantity: 1', // 상품명과 수량 정보
-              style: TextStyle(fontSize: 16.0),
-            ),
             SizedBox(height: 20.0), // 위젯 간 간격 조절
             // 배송 정보 입력 섹션
             Text(
@@ -86,13 +80,40 @@ class _PaymentPage extends StatelessWidget {
               '총 결제 금액 18,500', // 총 결제 금액 정보
               style: TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 12.0), // 위젯 간 간격 조절
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Payment Method', // 'Payment Method' 라벨 텍스트 표시
-                border: OutlineInputBorder(), // 테두리 스타일 추가
-              ),
+
+            Row( // Row to contain the buttons
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align buttons with space in between
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    // Respond to button press
+                  },
+                  child: Text("간편결제"), // Text for the first button
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    // Respond to button press
+                  },
+                  child: Text("카드결제"), // Text for the second button
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    // Respond to button press
+                  },
+                  child: Text("현금결제"),
+
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    // Respond to button press
+                  },
+                  child: Text("휴대폰결제"), // Text for the second button
+                ),
+              ],
             ),
+
+
+
             SizedBox(height: 20.0), // 위젯 간 간격 조절
             ElevatedButton(
               onPressed: () {
