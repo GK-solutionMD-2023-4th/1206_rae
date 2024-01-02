@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
               width: 250.0,
               child: Column(
                 children: <Widget>[
+                  Image.asset('assets/images/log.jpg'),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '아이디',
