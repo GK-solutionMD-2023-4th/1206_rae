@@ -21,9 +21,10 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: 250.0,
+              width: 230.0,
               child: Column(
                 children: <Widget>[
+                  Image.asset('assets/images/log.jpg'),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '아이디',
@@ -64,12 +65,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
 
-                Spacer(), // Adds space between the login and sign-up text
-
-                // Sign-Up Text on the right side
-                GestureDetector(
-                  onTap: () {
-                    // Handle navigation to sign-up screen
+                TextButton(
+                  onPressed: () {
+                    // Handle login action
                   },
                   child: Text(
                     '회원가입',
@@ -79,9 +77,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+
+               ]
             ),
-          ],
+          ]
         ),
 
 
