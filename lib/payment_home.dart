@@ -189,7 +189,7 @@ class _PaymentPage extends StatelessWidget {
 
                   SizedBox(height: 20.0), // 위젯 간 간격 조절
 
-                  
+
 
                   ElevatedButton(
                     onPressed: () {
